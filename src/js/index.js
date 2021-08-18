@@ -36,18 +36,22 @@ const cal = () => {
 }
 
 // 숫자 클릭
-const clickNumber = digits.forEach(element => {
-    element.addEventListener("click", () => {
-        showTotal(element.textContent);
-    })
-})
+const handleNumber = (event) => {
+    showTotal(event.target.textContent);
+}
 
 // 연산자 클릭
-const clickOperate = operations.forEach(element => {
-    element.addEventListener('click', () => {
-        if (element.textContent === '=') {
-            cal();
-        }
-        operator = element.textContent;
-    })
-})
+const handleOperate = (event) => {
+    if (event.target.textContent === '=') {
+        cal();
+    } else {
+        operator = event.target.textContent;   
+    }
+}
+
+function init() {
+    operations.forEach(element => element.addEventListener('click', handleOperate));
+    digits.forEach(element => element.addEventListener("click", handleNumber));
+}
+
+init();
