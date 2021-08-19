@@ -10,6 +10,9 @@ let operator = '';
 // AC
 const clear = modifier.addEventListener('click', () => {
     total.textContent = '0';
+    first = '';
+    second = '';
+    operator = '';
 })
 
 // 계산하는 숫자 show
@@ -30,9 +33,37 @@ const showTotal = (num) => {
     }
 }
 
-// 연산자 '=' 클릭
+// 사칙연산
 const cal = () => {
-    console.log("test");
+    first = Number(first)
+    second = Number(second)
+    switch(operator) {
+        case '+':
+            first = String(first + second)
+            second = '';
+            total.textContent = first
+            break
+        case '-':
+            first = String(first - second)
+            second = '';
+            total.textContent = first
+            break
+        case 'X':
+            first = String(first * second)
+            second = '';
+            total.textContent = first
+            break
+        case '/':
+            first = String(first / second)
+            second = '';
+            total.textContent = first
+            break
+        case '=':
+            first = String(first / second)
+            second = '';
+            total.textContent = first
+            break
+    }
 }
 
 // 숫자 클릭
@@ -42,8 +73,9 @@ const handleNumber = (event) => {
 
 // 연산자 클릭
 const handleOperate = (event) => {
-    if (event.target.textContent === '=') {
+    if (second !== '') {
         cal();
+        operator = event.target.textContent;
     } else {
         operator = event.target.textContent;   
     }
