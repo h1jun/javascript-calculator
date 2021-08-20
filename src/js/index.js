@@ -18,14 +18,20 @@ const clear = modifier.addEventListener('click', () => {
 // 계산하는 숫자 show
 const showTotal = (num) => {
     if(operator) {
-        if(second === '') {
+        if(second === '' && num === '.') {
+            total.textContent = '0'
+        } else if(second === '') {
             total.textContent = ''
         }
         total.textContent += num
         second += num;
-    } else if (total.textContent === '0') {
-        total.textContent = ''
-        total.textContent += num
+    } else if (first === '') {
+        if (num === '.') {
+            total.textContent += num    
+        } else {
+            total.textContent = ''
+            total.textContent += num
+        }
         first += num
     } else {
         first += num
@@ -35,31 +41,27 @@ const showTotal = (num) => {
 
 // 사칙연산
 const cal = () => {
-    first = Number(first)
+    first = new BigNumber(Number(first))
     second = Number(second)
     switch(operator) {
         case '+':
-            first = String(first + second)
+            first = first.plus(second)
+            // first = String(Math.round((first + second) * 10) / 10)
             second = '';
             total.textContent = first
             break
         case '-':
-            first = String(first - second)
+            first = first.minus(second)
             second = '';
             total.textContent = first
             break
         case 'X':
-            first = String(first * second)
+            first = first.multipliedBy(second)
             second = '';
             total.textContent = first
             break
         case '/':
-            first = String(first / second)
-            second = '';
-            total.textContent = first
-            break
-        case '=':
-            first = String(first / second)
+            first = first.dividedBy(second)
             second = '';
             total.textContent = first
             break
