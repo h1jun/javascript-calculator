@@ -22,9 +22,11 @@ const showTotal = (num) => {
             total.textContent = '0'
         } else if(second === '') {
             total.textContent = ''
+        } 
+        if (!(num === '.' && second.indexOf('.') >= 0)) {
+            total.textContent += num
+            second += num;
         }
-        total.textContent += num
-        second += num;
     } else if (first === '') {
         if (num === '.') {
             total.textContent += num    
@@ -34,8 +36,10 @@ const showTotal = (num) => {
         }
         first += num
     } else {
-        first += num
-        total.textContent += num
+        if (!(num === '.' && first.indexOf('.') >= 0)) {
+            first += num
+            total.textContent += num
+        } 
     }
 }
 
@@ -46,7 +50,6 @@ const cal = () => {
     switch(operator) {
         case '+':
             first = first.plus(second)
-            // first = String(Math.round((first + second) * 10) / 10)
             second = '';
             total.textContent = first
             break
