@@ -27,9 +27,12 @@ const showTotal = (num) => {
         // 0클릭 후 또 0클릭하면 0으로 고정, 그 뒤 다른 숫자 클릭하면 0 사라지기
         if (second.length === 1 && second[0] === '0' && num === '0') {
             total.textContent = '0'
+        } else if (second.length === 1 && second[0] === '0' && num === '.') {
+            second += num
+            total.textContent += num 
         } else if (second.length === 1 && second[0] === '0' && num !== '0') {
             second += num;
-            total.textContent += num
+            total.textContent = num
         } else if (!(num === '.' && second.indexOf('.') >= 0)) {
             total.textContent += num
             second += num;
@@ -38,20 +41,19 @@ const showTotal = (num) => {
         if (num === '.') {
             total.textContent = "0" + num  
         } else {
-            if (first === '0' && num === '.') {
-                total.textContent += num
-            } else {
-                total.textContent = ''
-                total.textContent += num
-            }
+            total.textContent = ''
+            total.textContent += num
         }
         first += num
     } else {
         if (first.length === 1 && first[0] === '0' && num === '0') {
             total.textContent = '0'
-        } else if (first.length === 1 && first[0] === '0' && num !== '0') {
+        } else if (first.length === 1 && first[0] === '0' && num === '.') {
             first += num
             total.textContent += num
+        } else if (first.length === 1 && first[0] === '0' && num !== '0') {
+            first = num
+            total.textContent = num
         } else if (!(num === '.' && first.indexOf('.') >= 0)) {
             first += num
             total.textContent += num
