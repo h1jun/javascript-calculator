@@ -29,17 +29,21 @@ const showTotal = (num) => {
             total.textContent = '0'
         } else if (second.length === 1 && second[0] === '0' && num !== '0') {
             second += num;
-            total.textContent = num
+            total.textContent += num
         } else if (!(num === '.' && second.indexOf('.') >= 0)) {
             total.textContent += num
             second += num;
         }
     } else if (first === '') {
         if (num === '.') {
-            total.textContent += num    
+            total.textContent = "0" + num  
         } else {
-            total.textContent = ''
-            total.textContent += num
+            if (first === '0' && num === '.') {
+                total.textContent += num
+            } else {
+                total.textContent = ''
+                total.textContent += num
+            }
         }
         first += num
     } else {
@@ -47,7 +51,7 @@ const showTotal = (num) => {
             total.textContent = '0'
         } else if (first.length === 1 && first[0] === '0' && num !== '0') {
             first += num
-            total.textContent = num
+            total.textContent += num
         } else if (!(num === '.' && first.indexOf('.') >= 0)) {
             first += num
             total.textContent += num
